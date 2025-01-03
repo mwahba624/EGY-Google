@@ -49,8 +49,7 @@ userSchema.pre('save', async function (next) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
-
-  next();
+ next();
 });
 
 // custom method to compare and validate password for logging in
@@ -67,3 +66,43 @@ userSchema.virtual('bookCount').get(function () {
 const User = model<UserDocument>('User', userSchema);
 
 export default User;
+
+////////////////////////////////
+
+/*
+import mongoose, { Schema, Document, Model } from 'mongoose';
+import bcrypt from 'bcrypt';
+import bookSchema from './Book';
+
+
+// Define the interface for the user document
+interface UserDocument extends Document {
+  username: string;
+  email: string;
+  password: string;
+  savedBooks: Array<object>; // Adjust this to the actual shape of your book data
+  isCorrectPassword(password: string): Promise<boolean>;
+}
+
+// Define the User Schema
+const userSchema: Schema<UserDocument> = new Schema({
+  username: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  savedBooks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Book', // Assuming there's a Book model referenced here
+    },
+  ],
+});
+
+// Password comparison method (you can adjust this based on your actual logic)
+userSchema.methods.isCorrectPassword = async function (password: string): Promise<boolean> {
+  return password === this.password; // Simplified example, typically you would use bcrypt
+};
+
+// Create and export the User model with the correct typing
+const User: Model<UserDocument> = mongoose.model('User', userSchema);
+export default User;
+*/
