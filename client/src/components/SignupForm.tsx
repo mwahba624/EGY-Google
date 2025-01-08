@@ -2,21 +2,24 @@ import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
+import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
-import{useMutation} from '@apollo/client';
-import Auth from '../utils/auth';
 import type { User } from '../models/User';
+import Auth from '../utils/auth';
 
-// biome-ignore lint/correctness/noEmptyPattern: <explanation>
+
+// signup form component
 const SignupForm = ({}: { handleModalClose: () => void }) => {
+
   // set initial form state
   const [userFormData, setUserFormData] = useState<User>({ username: '', email: '', password: '', savedBooks: [] });
 
-  // set state for addUser mutation
+//  // use mutation for adding a user
   const [addUser] = useMutation(ADD_USER);
 
   // set state for form validation
   const [validated] = useState(false);
+
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
@@ -27,6 +30,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+  
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
@@ -35,10 +39,14 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
       event.stopPropagation();
     }
 
-    try {
-      const {data} = await addUser({
-        variables: {...userFormData},
-      });
+    try { // try to add a user
+      console.log(`testing sign-up data before backend`, userFormData);
+      
+      const { data } = await addUser({
+        variables: { input: {...userFormData} },
+      }); // if successful, log in the user
+      console.log(`testing sign-up data after backend`, data);
+
       Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);

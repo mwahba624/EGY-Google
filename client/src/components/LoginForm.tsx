@@ -3,13 +3,16 @@ import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-import { LOGIN_USER } from '../utils/mutations';
-import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
 import type { User } from '../models/User';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
+import Auth from '../utils/auth';
 
-// biome-ignore lint/correctness/noEmptyPattern: <explanation>
+
+
+// login form component
 const LoginForm = ({}: { handleModalClose: () => void }) => {
+
   const [userFormData, setUserFormData] = useState<User>({ username: '', email: '', password: '', savedBooks: [] });
   const [login] = useMutation(LOGIN_USER);
   const [validated] = useState(false);
@@ -23,7 +26,7 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
+    // form validation
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -31,14 +34,16 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
     }
 
     try {
-     const { data } = await login({
+      const { data } = await login({
         variables: { ...userFormData },
       });
+
       Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
+
     setUserFormData({
       username: '',
       email: '',

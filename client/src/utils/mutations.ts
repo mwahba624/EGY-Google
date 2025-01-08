@@ -1,3 +1,4 @@
+
 import { gql } from '@apollo/client';
 
 export const LOGIN_USER = gql`
@@ -8,7 +9,6 @@ export const LOGIN_USER = gql`
       _id
       username
       email
-      # array of savedBooks instead of thoughts here!
       savedBooks {
         bookId
         authors
@@ -29,14 +29,13 @@ export const ADD_USER = gql`
       _id
       username
       email
-      # array of savedBooks instead of thoughts here!
       savedBooks {
         bookId
         authors
         description
         title
         image
-       # link
+        link
       }
     }
     token

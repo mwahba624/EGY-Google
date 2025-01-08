@@ -1,3 +1,4 @@
+
 import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
@@ -49,7 +50,8 @@ userSchema.pre('save', async function (next) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
- next();
+
+  next();
 });
 
 // custom method to compare and validate password for logging in
@@ -66,6 +68,7 @@ userSchema.virtual('bookCount').get(function () {
 const User = model<UserDocument>('User', userSchema);
 
 export default User;
+
 
 ////////////////////////////////
 
