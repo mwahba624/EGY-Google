@@ -1,40 +1,38 @@
 
-// /*
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    /* Modules */
+    "rootDir": "src" /* Specify the root folder within your source files. */,
+
+    /* Emit */
+    "outDir": "dist" /* Specify an output folder for all emitted files. */
+    // "noEmitOnError": true /* Disable emitting files if any type checking errors are reported. */
+  },
+  "include": ["src"],
+  "typeRoots": ["./node_modules/@types", "./src/types"]
+}
+
+
 
 // {
 //   "extends": "../tsconfig.json",
 //   "compilerOptions": {
 //     /* Modules */
-//     "rootDir": "src" /* Specify the root folder within your source files. */,
+//     "rootDir": "src",
+//     "outDir": "dist",
+
+//     /* TypeScript Features */
+//     "strict": true,
+//     "esModuleInterop": true,
+//     "skipLibCheck": true,
+//     "resolveJsonModule": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "allowSyntheticDefaultImports": true,
 
 //     /* Emit */
-//     "outDir": "dist" /* Specify an output folder for all emitted files. */
-//     // "noEmitOnError": true /* Disable emitting files if any type checking errors are reported. */
+//     "noEmitOnError": true
 //   },
 //   "include": ["src"],
 //   "typeRoots": ["./node_modules/@types", "./src/types"]
 // }
-
-// */
-
-{
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    /* Modules */
-    "rootDir": "src",
-    "outDir": "dist",
-
-    /* TypeScript Features */
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-
-    /* Emit */
-    "noEmitOnError": true
-  },
-  "include": ["src"],
-  "typeRoots": ["./node_modules/@types", "./src/types"]
-}
