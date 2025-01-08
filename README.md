@@ -67,7 +67,7 @@ N/A
 - [Video link](N/A)
 
 ## Deployed Link
-- [Deployed Link](N/A)
+- [Deployed Link](https://egy-google.onrender.com)
 
 ## Questions
 - [Github Profile](https://github.com/mwahba624/EGY-Google)
